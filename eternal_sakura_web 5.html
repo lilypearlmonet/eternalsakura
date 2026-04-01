@@ -1,0 +1,917 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Eternal Sakura — 永遠の桜</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Noto+Serif+JP:wght@300;400;700&display=swap');
+
+:root {
+  --gold: #c8a96e;
+  --gold-light: #f0d898;
+  --gold-dim: #886644;
+  --black: #060604;
+  --dark: #0e0c08;
+  --dark2: #1a1810;
+  --cream: #e8e0cc;
+  --cream-dim: #a09080;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--black);
+  color: var(--cream);
+  font-family: 'Cormorant Garamond', serif;
+  overflow-x: hidden;
+  cursor: crosshair;
+}
+
+/* ===== GRAIN OVERLAY ===== */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.35;
+}
+
+/* ===== NAV ===== */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  padding: 24px 48px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(to bottom, rgba(6,6,4,0.95), transparent);
+}
+
+.nav-logo {
+  font-family: 'Cinzel', serif;
+  font-size: 13px;
+  letter-spacing: 0.35em;
+  color: var(--gold);
+  text-decoration: none;
+}
+
+.nav-logo span {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 11px;
+  color: var(--gold-dim);
+  display: block;
+  letter-spacing: 0.2em;
+  margin-top: 2px;
+}
+
+.nav-links {
+  display: flex;
+  gap: 36px;
+  list-style: none;
+}
+
+.nav-links a {
+  font-family: 'Cinzel', serif;
+  font-size: 9px;
+  letter-spacing: 0.3em;
+  color: var(--gold-dim);
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: color 0.3s;
+}
+
+.nav-links a:hover { color: var(--gold); }
+
+/* ===== HERO ===== */
+.hero {
+  position: relative;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  opacity: 0.18;
+  filter: grayscale(100%) contrast(1.1);
+}
+
+.hero-bg div {
+  background-size: cover;
+  background-position: center;
+}
+
+.hero-bg-1 { background-image: url('IMG_7102.png'); }
+.hero-bg-2 { background-image: url('IMG_7106.png'); }
+.hero-bg-3 { background-image: url('名称未設定のテ_サ_イン.png'); }
+.hero-bg-4 { background-image: url('Untitled_design.png'); }
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at center, rgba(6,6,4,0.3) 0%, rgba(6,6,4,0.85) 70%),
+    linear-gradient(to bottom, rgba(6,6,4,0.6) 0%, rgba(6,6,4,0.2) 50%, rgba(6,6,4,0.9) 100%);
+}
+
+.hero-content {
+  position: relative;
+  text-align: center;
+  z-index: 2;
+  animation: heroFadeIn 2.5s ease forwards;
+}
+
+@keyframes heroFadeIn {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.hero-eyebrow {
+  font-family: 'Cinzel', serif;
+  font-size: 9px;
+  letter-spacing: 0.6em;
+  color: var(--gold-dim);
+  text-transform: uppercase;
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  justify-content: center;
+}
+
+.hero-eyebrow::before,
+.hero-eyebrow::after {
+  content: '';
+  width: 40px;
+  height: 0.5px;
+  background: var(--gold-dim);
+  opacity: 0.5;
+}
+
+.hero-title {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(42px, 7vw, 88px);
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  color: var(--gold-light);
+  line-height: 1;
+  margin-bottom: 12px;
+  text-shadow: 0 0 80px rgba(200,169,110,0.3);
+}
+
+.hero-title-jp {
+  font-family: 'Noto Serif JP', serif;
+  font-size: clamp(16px, 2.5vw, 26px);
+  font-weight: 300;
+  letter-spacing: 0.5em;
+  color: var(--gold);
+  opacity: 0.8;
+  margin-bottom: 40px;
+}
+
+.hero-tagline {
+  font-size: clamp(14px, 1.8vw, 18px);
+  font-style: italic;
+  color: var(--cream-dim);
+  letter-spacing: 0.05em;
+  line-height: 1.8;
+  max-width: 520px;
+  margin: 0 auto 48px;
+}
+
+.hero-tagline-jp {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 12px;
+  color: var(--gold-dim);
+  letter-spacing: 0.2em;
+  margin-top: 8px;
+}
+
+.hero-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  border: 1px solid var(--gold);
+  color: var(--gold);
+  text-decoration: none;
+  padding: 14px 36px;
+  font-family: 'Cinzel', serif;
+  font-size: 10px;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  transition: all 0.4s;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-cta::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--gold);
+  transform: translateX(-101%);
+  transition: transform 0.4s;
+  z-index: -1;
+}
+
+.hero-cta:hover {
+  color: var(--black);
+}
+
+.hero-cta:hover::before {
+  transform: translateX(0);
+}
+
+.hero-scroll {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  animation: scrollBounce 2s ease-in-out infinite;
+}
+
+@keyframes scrollBounce {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(8px); }
+}
+
+.hero-scroll span {
+  font-family: 'Cinzel', serif;
+  font-size: 7px;
+  letter-spacing: 0.4em;
+  color: var(--gold-dim);
+  text-transform: uppercase;
+}
+
+.hero-scroll-line {
+  width: 1px;
+  height: 40px;
+  background: linear-gradient(to bottom, var(--gold-dim), transparent);
+}
+
+/* ===== SECTION BASE ===== */
+section {
+  padding: 120px 48px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.section-label {
+  font-family: 'Cinzel', serif;
+  font-size: 8px;
+  letter-spacing: 0.5em;
+  color: var(--gold-dim);
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.section-label::after {
+  content: '';
+  flex: 1;
+  max-width: 60px;
+  height: 0.5px;
+  background: var(--gold-dim);
+  opacity: 0.4;
+}
+
+.section-title {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(28px, 4vw, 48px);
+  font-weight: 600;
+  color: var(--gold-light);
+  letter-spacing: 0.1em;
+  line-height: 1.2;
+  margin-bottom: 8px;
+}
+
+.section-title-jp {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 14px;
+  color: var(--gold-dim);
+  letter-spacing: 0.3em;
+  margin-bottom: 32px;
+}
+
+/* ===== DIVIDER ===== */
+.divider {
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--gold), transparent);
+  opacity: 0.15;
+  margin: 0;
+}
+
+/* ===== ABOUT SECTION ===== */
+.about-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: start;
+  padding: 120px 48px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.about-text p {
+  font-size: 17px;
+  line-height: 2;
+  color: var(--cream-dim);
+  margin-bottom: 20px;
+  font-weight: 300;
+}
+
+.about-text p strong {
+  color: var(--cream);
+  font-weight: 600;
+}
+
+.about-text-jp {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 13px;
+  line-height: 2.2;
+  color: #666;
+  border-left: 1px solid var(--gold-dim);
+  padding-left: 20px;
+  margin-top: 32px;
+  opacity: 0.7;
+}
+
+.about-photos {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.about-photo {
+  aspect-ratio: 3/4;
+  background-size: cover;
+  background-position: center;
+  filter: grayscale(100%) contrast(1.05);
+  opacity: 0.75;
+  transition: opacity 0.4s, filter 0.4s;
+  position: relative;
+  overflow: hidden;
+}
+
+.about-photo:hover {
+  opacity: 0.9;
+  filter: grayscale(80%) contrast(1.1);
+}
+
+.about-photo::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, transparent 50%, rgba(6,6,4,0.6) 100%);
+}
+
+.about-photo.tall {
+  grid-row: span 2;
+  aspect-ratio: auto;
+}
+
+/* ===== MISSION SECTION ===== */
+.mission-section {
+  background: var(--dark2);
+  padding: 100px 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.mission-section::before {
+  content: '永遠';
+  position: absolute;
+  font-family: 'Noto Serif JP', serif;
+  font-size: 300px;
+  color: var(--gold);
+  opacity: 0.025;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+.mission-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 48px;
+}
+
+.mission-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 48px;
+  margin-top: 60px;
+}
+
+.mission-card {
+  border-top: 1px solid rgba(200,169,110,0.2);
+  padding-top: 32px;
+  position: relative;
+}
+
+.mission-card::before {
+  content: attr(data-num);
+  font-family: 'Cinzel', serif;
+  font-size: 48px;
+  color: var(--gold);
+  opacity: 0.12;
+  position: absolute;
+  top: 20px;
+  right: 0;
+  line-height: 1;
+}
+
+.mission-card h3 {
+  font-family: 'Cinzel', serif;
+  font-size: 14px;
+  letter-spacing: 0.2em;
+  color: var(--gold);
+  margin-bottom: 8px;
+  text-transform: uppercase;
+}
+
+.mission-card h3-jp {
+  display: block;
+  font-family: 'Noto Serif JP', serif;
+  font-size: 11px;
+  color: var(--gold-dim);
+  letter-spacing: 0.2em;
+  margin-bottom: 20px;
+  opacity: 0.7;
+}
+
+.mission-card p {
+  font-size: 15px;
+  line-height: 1.9;
+  color: var(--cream-dim);
+  font-weight: 300;
+}
+
+/* ===== GALLERY SECTION ===== */
+.gallery-section {
+  padding: 120px 0;
+  overflow: hidden;
+}
+
+.gallery-header {
+  max-width: 1200px;
+  margin: 0 auto 60px;
+  padding: 0 48px;
+}
+
+.gallery-scroll {
+  display: flex;
+  gap: 12px;
+  padding: 0 48px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  cursor: grab;
+}
+
+.gallery-scroll::-webkit-scrollbar { display: none; }
+.gallery-scroll:active { cursor: grabbing; }
+
+.gallery-item {
+  flex: 0 0 auto;
+  width: 280px;
+  aspect-ratio: 3/4;
+  background-size: cover;
+  background-position: center;
+  filter: grayscale(100%) contrast(1.05);
+  opacity: 0.7;
+  transition: opacity 0.4s, filter 0.4s, transform 0.4s;
+  position: relative;
+  overflow: hidden;
+}
+
+.gallery-item:hover {
+  opacity: 0.9;
+  filter: grayscale(60%) contrast(1.1) sepia(0.2);
+  transform: scale(1.02);
+}
+
+.gallery-item::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(6,6,4,0.7) 0%, transparent 50%);
+}
+
+.gallery-item-wide {
+  width: 420px;
+  aspect-ratio: 16/9;
+}
+
+/* ===== QUOTE SECTION ===== */
+.quote-section {
+  text-align: center;
+  padding: 140px 48px;
+  max-width: 900px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.quote-section::before {
+  content: '"';
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 200px;
+  color: var(--gold);
+  opacity: 0.08;
+  position: absolute;
+  top: 60px;
+  left: 50%;
+  transform: translateX(-50%);
+  line-height: 1;
+  pointer-events: none;
+}
+
+.quote-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(22px, 3vw, 36px);
+  font-style: italic;
+  font-weight: 300;
+  color: var(--cream);
+  line-height: 1.7;
+  margin-bottom: 24px;
+  position: relative;
+}
+
+.quote-text-jp {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 14px;
+  color: var(--gold-dim);
+  letter-spacing: 0.2em;
+  line-height: 2;
+  margin-bottom: 32px;
+}
+
+.quote-source {
+  font-family: 'Cinzel', serif;
+  font-size: 9px;
+  letter-spacing: 0.4em;
+  color: var(--gold-dim);
+  text-transform: uppercase;
+}
+
+/* ===== INSTAGRAM SECTION ===== */
+.instagram-section {
+  background: var(--dark2);
+  padding: 100px 0;
+}
+
+.instagram-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 48px;
+}
+
+.instagram-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 40px;
+  text-decoration: none;
+  border: 1px solid rgba(200,169,110,0.3);
+  padding: 20px 40px;
+  transition: all 0.4s;
+  position: relative;
+  overflow: hidden;
+}
+
+.instagram-link::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(200,169,110,0.08);
+  transform: translateX(-101%);
+  transition: transform 0.4s;
+}
+
+.instagram-link:hover::before { transform: translateX(0); }
+
+.instagram-link-icon {
+  font-size: 24px;
+}
+
+.instagram-link-text {
+  font-family: 'Cinzel', serif;
+  font-size: 11px;
+  letter-spacing: 0.3em;
+  color: var(--gold);
+  text-transform: uppercase;
+}
+
+.instagram-link-sub {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 10px;
+  color: var(--gold-dim);
+  letter-spacing: 0.2em;
+  display: block;
+  margin-top: 3px;
+}
+
+/* ===== FOOTER ===== */
+footer {
+  padding: 60px 48px;
+  border-top: 1px solid rgba(200,169,110,0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.footer-logo {
+  font-family: 'Cinzel', serif;
+  font-size: 14px;
+  letter-spacing: 0.3em;
+  color: var(--gold);
+}
+
+.footer-logo span {
+  font-family: 'Noto Serif JP', serif;
+  font-size: 11px;
+  color: var(--gold-dim);
+  display: block;
+  margin-top: 4px;
+}
+
+.footer-copy {
+  font-size: 10px;
+  color: #444;
+  letter-spacing: 0.15em;
+}
+
+/* ===== ANIMATIONS ===== */
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ===== MOBILE ===== */
+@media (max-width: 768px) {
+  nav { padding: 20px 24px; }
+  .nav-links { display: none; }
+  section { padding: 80px 24px; }
+  .about-section {
+    grid-template-columns: 1fr;
+    gap: 48px;
+    padding: 80px 24px;
+  }
+  .mission-grid { grid-template-columns: 1fr; gap: 32px; }
+  .gallery-scroll { padding: 0 24px; }
+  .gallery-item { width: 220px; }
+  footer { padding: 40px 24px; flex-direction: column; text-align: center; }
+  .hero-content { padding: 0 24px; }
+  .quote-section { padding: 80px 24px; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">
+    ETERNAL SAKURA
+    <span>永遠の桜</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#mission">Mission</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#instagram">Instagram</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-bg">
+    <div class="hero-bg-1"></div>
+    <div class="hero-bg-2"></div>
+    <div class="hero-bg-3"></div>
+    <div class="hero-bg-4"></div>
+  </div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">Japanese History & Untold Emotions</div>
+    <h1 class="hero-title">ETERNAL<br>SAKURA</h1>
+    <p class="hero-title-jp">永遠の桜</p>
+    <p class="hero-tagline">
+      They gave everything. The world forgot.<br>
+      We remember. 🕯️
+    </p>
+    <p class="hero-tagline-jp">桜は散っても、記憶は永遠に。</p>
+    <a href="#about" class="hero-cta">Discover Their Story</a>
+  </div>
+  <div class="hero-scroll">
+    <span>Scroll</span>
+    <div class="hero-scroll-line"></div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ABOUT -->
+<div id="about" class="about-section">
+  <div class="about-text fade-in">
+    <div class="section-label">About This Account</div>
+    <h2 class="section-title">Stories Japan<br>Never Told</h2>
+    <p class="section-title-jp">語られなかった物語</p>
+
+    <p>
+      <strong>Eternal Sakura</strong> is a tribute account dedicated to preserving the untold stories of Japan's history — particularly the young men of the Special Attack Units (神風特攻隊), who gave their lives believing in something greater than themselves.
+    </p>
+    <p>
+      They were not just soldiers. They were <strong>sons, brothers, students</strong> — young men with dreams, with people they loved. Their final letters speak of cherry blossoms, of mothers, of a Japan they believed was worth dying for.
+    </p>
+    <p>
+      This account exists so that their voices are not silenced by time. Through photos, videos, and their own words — we share their humanity with the world.
+    </p>
+
+    <div class="about-text-jp">
+      このアカウントは、日本の歴史の中で語られることの少なかった物語を伝えるために作りました。<br>
+      特攻隊員たちは、ただの兵士ではありませんでした。<br>
+      彼らは夢を持ち、家族を愛した、普通の若者たちでした。<br>
+      その記憶を、世界に届けたい。
+    </div>
+  </div>
+
+  <div class="about-photos fade-in">
+    <div class="about-photo tall" style="background-image: url('IMG_7102.png')"></div>
+    <div class="about-photo" style="background-image: url('IMG_7106.png')"></div>
+    <div class="about-photo" style="background-image: url('IMG_7105.jpeg')"></div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- MISSION -->
+<div id="mission" class="mission-section">
+  <div class="mission-inner">
+    <div class="section-label fade-in">Our Mission</div>
+    <h2 class="section-title fade-in">Why We Remember</h2>
+    <p class="section-title-jp fade-in">なぜ、伝えるのか</p>
+
+    <div class="mission-grid">
+      <div class="mission-card fade-in" data-num="01">
+        <h3>Remember</h3>
+        <h3-jp>記憶する</h3-jp>
+        <p>
+          Over 3,800 young men died as kamikaze pilots between 1944 and 1945. Most were between 17 and 24 years old. Their names deserve to be remembered — not as weapons, but as human beings.
+        </p>
+      </div>
+      <div class="mission-card fade-in" data-num="02">
+        <h3>Share</h3>
+        <h3-jp>伝える</h3-jp>
+        <p>
+          Their final letters are filled with love — for their mothers, for cherry blossoms, for the land they called home. We translate and share these words so the world can truly hear them.
+        </p>
+      </div>
+      <div class="mission-card fade-in" data-num="03">
+        <h3>Connect</h3>
+        <h3-jp>繋がる</h3-jp>
+        <p>
+          Beyond borders and beyond history, grief and love are universal. We believe that when the world sees their humanity, it changes how we understand war, sacrifice, and what truly matters.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- QUOTE -->
+<div class="quote-section fade-in">
+  <p class="quote-text">
+    "Mother, please stay well.<br>
+    The cherry blossoms were so beautiful.<br>
+    I love Japan. That is all."
+  </p>
+  <p class="quote-text-jp">
+    「お母さん、どうか元気でいてください。<br>
+    桜がとても綺麗でした。日本が好きです。ただそれだけです。」
+  </p>
+  <p class="quote-source">— Final letter of a Kamikaze pilot, 1945</p>
+</div>
+
+<div class="divider"></div>
+
+<!-- GALLERY -->
+<div id="gallery" class="gallery-section">
+  <div class="gallery-header fade-in">
+    <div class="section-label">Gallery</div>
+    <h2 class="section-title">Their Faces,<br>Their World</h2>
+    <p class="section-title-jp">彼らの顔、彼らの世界</p>
+  </div>
+
+  <div class="gallery-scroll" id="galleryScroll">
+    <div class="gallery-item" style="background-image: url('IMG_7106.png')"></div>
+    <div class="gallery-item" style="background-image: url('IMG_7105.jpeg')"></div>
+    <div class="gallery-item gallery-item-wide" style="background-image: url('Untitled_design.png'); background-position: center top;"></div>
+    <div class="gallery-item" style="background-image: url('IMG_7104.jpeg')"></div>
+    <div class="gallery-item" style="background-image: url('IMG_7103.jpeg')"></div>
+    <div class="gallery-item gallery-item-wide" style="background-image: url('名称未設定のテ_サ_イン.png')"></div>
+    <div class="gallery-item" style="background-image: url('IMG_7102.png')"></div>
+    <div class="gallery-item" style="background-image: url('IMG_7101.jpeg')"></div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- INSTAGRAM -->
+<div id="instagram" class="instagram-section">
+  <div class="instagram-inner">
+    <div class="section-label fade-in">Follow Along</div>
+    <h2 class="section-title fade-in">Join the Journey</h2>
+    <p class="section-title-jp fade-in">一緒に記憶を守ろう</p>
+
+    <p class="fade-in" style="font-size:17px; line-height:2; color:var(--cream-dim); max-width:600px; font-weight:300; margin-bottom: 16px;">
+      New stories, photos, and videos are shared regularly on Instagram. Each post is bilingual — in English and Japanese — so that people around the world can connect with these stories.
+    </p>
+    <p class="fade-in" style="font-family:'Noto Serif JP',serif; font-size:13px; color:#666; line-height:2; max-width:500px;">
+      毎週、新しい写真や動画、特攻隊員たちの言葉をInstagramで発信しています。<br>英語と日本語で、世界に届けます。
+    </p>
+
+    <a href="https://www.instagram.com/eternal.sakura.jp" target="_blank" class="instagram-link fade-in">
+      <span class="instagram-link-icon">🌸</span>
+      <div>
+        <span class="instagram-link-text">@eternal.sakura.jp</span>
+        <span class="instagram-link-sub">Follow on Instagram</span>
+      </div>
+    </a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">
+    ETERNAL SAKURA
+    <span>永遠の桜 — @eternal.sakura.jp</span>
+  </div>
+  <p class="footer-copy">
+    Dedicated to those who never came home. 🕯️<br>
+    帰らなかった人たちへ。
+  </p>
+</footer>
+
+<script>
+// Scroll fade-in
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(el => {
+    if (el.isIntersecting) {
+      el.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.15 });
+
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+// Gallery drag scroll
+const gallery = document.getElementById('galleryScroll');
+let isDown = false, startX, scrollLeft;
+
+gallery.addEventListener('mousedown', e => {
+  isDown = true;
+  startX = e.pageX - gallery.offsetLeft;
+  scrollLeft = gallery.scrollLeft;
+});
+gallery.addEventListener('mouseleave', () => isDown = false);
+gallery.addEventListener('mouseup', () => isDown = false);
+gallery.addEventListener('mousemove', e => {
+  if (!isDown) return;
+  e.preventDefault();
+  const x = e.pageX - gallery.offsetLeft;
+  gallery.scrollLeft = scrollLeft - (x - startX) * 1.5;
+});
+</script>
+
+</body>
+</html>
